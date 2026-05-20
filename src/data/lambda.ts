@@ -121,7 +121,7 @@ async function processOrder(order) {
 }`;
 
 export const invocationData = Array.from({ length: 24 }, (_, i) => ({
-  time: \`\${i.toString().padStart(2, "0")}:00\`,
+  time: `${i.toString().padStart(2, "0")}:00`,
   invocations: Math.floor(Math.random() * 800) + 200,
   errors: Math.floor(Math.random() * 20),
   duration: Math.floor(Math.random() * 400) + 100,
