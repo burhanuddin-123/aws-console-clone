@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as S3IndexRouteImport } from './routes/s3.index'
+import { Route as LambdaIndexRouteImport } from './routes/lambda.index'
+import { Route as Ec2IndexRouteImport } from './routes/ec2.index'
+import { Route as DynamodbIndexRouteImport } from './routes/dynamodb.index'
+import { Route as CloudwatchIndexRouteImport } from './routes/cloudwatch.index'
+import { Route as S3BucketNameRouteImport } from './routes/s3.$bucketName'
+import { Route as LambdaFunctionNameRouteImport } from './routes/lambda.$functionName'
+import { Route as Ec2InstanceIdRouteImport } from './routes/ec2.$instanceId'
+import { Route as DynamodbTableNameRouteImport } from './routes/dynamodb.$tableName'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const S3IndexRoute = S3IndexRouteImport.update({
+  id: '/s3/',
+  path: '/s3/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LambdaIndexRoute = LambdaIndexRouteImport.update({
+  id: '/lambda/',
+  path: '/lambda/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Ec2IndexRoute = Ec2IndexRouteImport.update({
+  id: '/ec2/',
+  path: '/ec2/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DynamodbIndexRoute = DynamodbIndexRouteImport.update({
+  id: '/dynamodb/',
+  path: '/dynamodb/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CloudwatchIndexRoute = CloudwatchIndexRouteImport.update({
+  id: '/cloudwatch/',
+  path: '/cloudwatch/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const S3BucketNameRoute = S3BucketNameRouteImport.update({
+  id: '/s3/$bucketName',
+  path: '/s3/$bucketName',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LambdaFunctionNameRoute = LambdaFunctionNameRouteImport.update({
+  id: '/lambda/$functionName',
+  path: '/lambda/$functionName',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Ec2InstanceIdRoute = Ec2InstanceIdRouteImport.update({
+  id: '/ec2/$instanceId',
+  path: '/ec2/$instanceId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DynamodbTableNameRoute = DynamodbTableNameRouteImport.update({
+  id: '/dynamodb/$tableName',
+  path: '/dynamodb/$tableName',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dynamodb/$tableName': typeof DynamodbTableNameRoute
+  '/ec2/$instanceId': typeof Ec2InstanceIdRoute
+  '/lambda/$functionName': typeof LambdaFunctionNameRoute
+  '/s3/$bucketName': typeof S3BucketNameRoute
+  '/cloudwatch/': typeof CloudwatchIndexRoute
+  '/dynamodb/': typeof DynamodbIndexRoute
+  '/ec2/': typeof Ec2IndexRoute
+  '/lambda/': typeof LambdaIndexRoute
+  '/s3/': typeof S3IndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dynamodb/$tableName': typeof DynamodbTableNameRoute
+  '/ec2/$instanceId': typeof Ec2InstanceIdRoute
+  '/lambda/$functionName': typeof LambdaFunctionNameRoute
+  '/s3/$bucketName': typeof S3BucketNameRoute
+  '/cloudwatch': typeof CloudwatchIndexRoute
+  '/dynamodb': typeof DynamodbIndexRoute
+  '/ec2': typeof Ec2IndexRoute
+  '/lambda': typeof LambdaIndexRoute
+  '/s3': typeof S3IndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dynamodb/$tableName': typeof DynamodbTableNameRoute
+  '/ec2/$instanceId': typeof Ec2InstanceIdRoute
+  '/lambda/$functionName': typeof LambdaFunctionNameRoute
+  '/s3/$bucketName': typeof S3BucketNameRoute
+  '/cloudwatch/': typeof CloudwatchIndexRoute
+  '/dynamodb/': typeof DynamodbIndexRoute
+  '/ec2/': typeof Ec2IndexRoute
+  '/lambda/': typeof LambdaIndexRoute
+  '/s3/': typeof S3IndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dynamodb/$tableName'
+    | '/ec2/$instanceId'
+    | '/lambda/$functionName'
+    | '/s3/$bucketName'
+    | '/cloudwatch/'
+    | '/dynamodb/'
+    | '/ec2/'
+    | '/lambda/'
+    | '/s3/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/dynamodb/$tableName'
+    | '/ec2/$instanceId'
+    | '/lambda/$functionName'
+    | '/s3/$bucketName'
+    | '/cloudwatch'
+    | '/dynamodb'
+    | '/ec2'
+    | '/lambda'
+    | '/s3'
+  id:
+    | '__root__'
+    | '/'
+    | '/dynamodb/$tableName'
+    | '/ec2/$instanceId'
+    | '/lambda/$functionName'
+    | '/s3/$bucketName'
+    | '/cloudwatch/'
+    | '/dynamodb/'
+    | '/ec2/'
+    | '/lambda/'
+    | '/s3/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DynamodbTableNameRoute: typeof DynamodbTableNameRoute
+  Ec2InstanceIdRoute: typeof Ec2InstanceIdRoute
+  LambdaFunctionNameRoute: typeof LambdaFunctionNameRoute
+  S3BucketNameRoute: typeof S3BucketNameRoute
+  CloudwatchIndexRoute: typeof CloudwatchIndexRoute
+  DynamodbIndexRoute: typeof DynamodbIndexRoute
+  Ec2IndexRoute: typeof Ec2IndexRoute
+  LambdaIndexRoute: typeof LambdaIndexRoute
+  S3IndexRoute: typeof S3IndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +169,84 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/s3/': {
+      id: '/s3/'
+      path: '/s3'
+      fullPath: '/s3/'
+      preLoaderRoute: typeof S3IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lambda/': {
+      id: '/lambda/'
+      path: '/lambda'
+      fullPath: '/lambda/'
+      preLoaderRoute: typeof LambdaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ec2/': {
+      id: '/ec2/'
+      path: '/ec2'
+      fullPath: '/ec2/'
+      preLoaderRoute: typeof Ec2IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dynamodb/': {
+      id: '/dynamodb/'
+      path: '/dynamodb'
+      fullPath: '/dynamodb/'
+      preLoaderRoute: typeof DynamodbIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cloudwatch/': {
+      id: '/cloudwatch/'
+      path: '/cloudwatch'
+      fullPath: '/cloudwatch/'
+      preLoaderRoute: typeof CloudwatchIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/s3/$bucketName': {
+      id: '/s3/$bucketName'
+      path: '/s3/$bucketName'
+      fullPath: '/s3/$bucketName'
+      preLoaderRoute: typeof S3BucketNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lambda/$functionName': {
+      id: '/lambda/$functionName'
+      path: '/lambda/$functionName'
+      fullPath: '/lambda/$functionName'
+      preLoaderRoute: typeof LambdaFunctionNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ec2/$instanceId': {
+      id: '/ec2/$instanceId'
+      path: '/ec2/$instanceId'
+      fullPath: '/ec2/$instanceId'
+      preLoaderRoute: typeof Ec2InstanceIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dynamodb/$tableName': {
+      id: '/dynamodb/$tableName'
+      path: '/dynamodb/$tableName'
+      fullPath: '/dynamodb/$tableName'
+      preLoaderRoute: typeof DynamodbTableNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DynamodbTableNameRoute: DynamodbTableNameRoute,
+  Ec2InstanceIdRoute: Ec2InstanceIdRoute,
+  LambdaFunctionNameRoute: LambdaFunctionNameRoute,
+  S3BucketNameRoute: S3BucketNameRoute,
+  CloudwatchIndexRoute: CloudwatchIndexRoute,
+  DynamodbIndexRoute: DynamodbIndexRoute,
+  Ec2IndexRoute: Ec2IndexRoute,
+  LambdaIndexRoute: LambdaIndexRoute,
+  S3IndexRoute: S3IndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
